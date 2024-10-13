@@ -20,5 +20,4 @@ class Preference < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :restriction, inclusion: { in: [true, false] }
 end
