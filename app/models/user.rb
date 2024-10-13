@@ -31,7 +31,6 @@
 #  invited_by_type        :string
 #  invited_by_id          :bigint
 #  invitations_count      :integer          default(0)
-#  preferences_enabled    :boolean          default(TRUE), not null
 #
 # Indexes
 #
@@ -54,7 +53,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, on: :update
 
   attribute :impersonated_by, :integer
-
+  has_many :preferences, dependent: :destroy
   before_validation :init_uid
 
   RANSACK_ATTRIBUTES = %w[id email first_name last_name username sign_in_count current_sign_in_at
