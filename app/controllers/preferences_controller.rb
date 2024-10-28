@@ -4,10 +4,14 @@ class PreferencesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_preference, only: %i[show edit update destroy]
 
+
   def index
     @preferences = current_user.preferences
     @pagy, @records = pagy(@preferences)
   end
+
+  
+  def show; end
 
   def new
     @preference = Preference.new
