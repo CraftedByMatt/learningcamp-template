@@ -10,9 +10,8 @@ class PreferencesController < ApplicationController
     @pagy, @records = pagy(@preferences)
   end
 
-  
   def show; end
-
+  
   def new
     @preference = Preference.new
   end
@@ -24,6 +23,22 @@ class PreferencesController < ApplicationController
       redirect_to preference_path(@preference), notice: t('views.preferences.create_success')
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @preference.update!(preference_params)
+      redirect_to preference_path(@preference), notice: t('views.preferences.update_success')
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @preference.destroy!
+      redirect_to preferences_path, notice: t('views.preferences.destroy_success')
+    else
+      redirect_to preferences_path, alert: t('views.preferences.destroy_failure')
     end
   end
 
