@@ -7,12 +7,19 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
-  def create
-    @recipe = current_user.recipes.build(recipe_params)
+  def new
+    @recipe = Recipe.new
+  end
 
-    if @recipe.save!
-      redirect_to recipe_path(@recipe), notice: t('views.recipes.create_success')
-    else
+  def create
+    message = params[:recipe][:ingredients]
+    user_id = current_user.id
+
+    begin
+      RecipeGeneratorService.new(message, user_id).call
+      redirect_to recipes_path, notice: 'Recipe created successfully'
+    rescue RecipeGeneratorServiceError => e
+      flash[:alert] = e.message
       render :new, status: :unprocessable_entity
     end
   end
