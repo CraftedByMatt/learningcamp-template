@@ -7,6 +7,20 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
+  def new
+    @recipe = Recipe.new
+  end
+
+  def create
+    message = params[:recipe][:ingredients]
+    user_id = current_user.id
+
+    begin
+      RecipeGeneratorService.new(message, user_id).call
+      redirect_to recipes_path, notice: 'Recipe created successfully'
+    rescue RecipeGeneratorServiceError => e
+      flash[:alert] = e.message
+      
   def create
     @recipe = current_user.recipes.build(recipe_params)
 

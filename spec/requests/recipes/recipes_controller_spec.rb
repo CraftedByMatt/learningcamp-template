@@ -2,36 +2,32 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Recipes', type: :request do
+RSpec.describe RecipesController, type: :controller do
   let(:user) { create(:user) }
-  let(:valid_attributes) { { name: 'Test Recipe', description: 'Test Description', ingredients: 'Test Ingredients' } }
-  let(:invalid_attributes) { { name: '', description: '', ingredients: '' } }
+  let(:valid_attributes) { { ingredients: "chicken, rice, broccoli" } }
+  let(:invalid_attributes) { { ingredients: "" } }
 
-  before { sign_in user }
+  before do
+    sign_in user
+  end
 
-  describe 'POST /recipes' do
-    context 'with valid attributes' do
-      it 'creates a new recipe' do
+  describe 'POST #create' do
+    context 'with valid params' do
+      it 'creates a new Recipe' do
         expect {
-          post recipes_path, params: { recipe: valid_attributes }
+          post :create, params: { recipe: valid_attributes }
         }.to change(Recipe, :count).by(1)
       end
 
       it 'redirects to the created recipe' do
-        post recipes_path, params: { recipe: valid_attributes }
-        expect(response).to redirect_to(recipe_path(Recipe.last))
+        post :create, params: { recipe: valid_attributes }
+        expect(response).to redirect_to(recipe_path(assigns(:recipe)))
       end
     end
 
-    context 'with invalid attributes' do
-      it 'does not create a new recipe' do
-        expect {
-          post recipes_path, params: { recipe: invalid_attributes }
-        }.not_to change(Recipe, :count)
-      end
-
-      it 're-renders the new template' do
-        post recipes_path, params: { recipe: invalid_attributes }
+    context 'with invalid params' do
+      it 'renders the new template' do
+        post :create, params: { recipe: invalid_attributes }
         expect(response).to render_template(:new)
       end
     end

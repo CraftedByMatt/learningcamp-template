@@ -129,6 +129,7 @@ en:
       - Name
       - Ingredients
       create_recipe: Create Recipe
+      create_success: Recipe successfully created.
       description: Here you will find all your recipes
       ingredients: Ingredients
       name: Name
@@ -138,6 +139,8 @@ en:
       new_recipe: New Recipe
       show_recipe: Recipe
       title: Recipes
+      update_recipe: Update Recipe
+      update_success: Recipe successfully updated.
     users:
       cancel: Cancel
       close_panel: Close panel
