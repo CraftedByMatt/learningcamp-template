@@ -28,6 +28,7 @@ class RecipesController < ApplicationController
     rescue RecipeGeneratorServiceError => e
       @recipe = Recipe.new(recipe_params)
       flash[:alert] = e.message
+
       render :new, status: :unprocessable_entity
     end
   end
