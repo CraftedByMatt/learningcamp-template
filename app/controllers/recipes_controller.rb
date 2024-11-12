@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
     begin
       @recipe = RecipeGeneratorService.new(message, current_user).call
       if @recipe.save
-        redirect_to recipes_path, notice: 'Recipe created successfully'
+        redirect_to recipes_path, notice: t('views.recipes.create_success')
       else
         render :new, status: :unprocessable_entity
       end
@@ -30,6 +30,14 @@ class RecipesController < ApplicationController
       flash[:alert] = e.message
 
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if Recipe.find(params[:id]).destroy!
+      redirect_to recipes_path, notice: t('views.recipes.destroy_success')
+    else
+      redirect_to recipes_path, alert: t('views.recipes.destroy_failure')
     end
   end
 

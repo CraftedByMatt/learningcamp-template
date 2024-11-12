@@ -4,31 +4,42 @@ require 'rails_helper'
 
 RSpec.describe RecipesController, type: :controller do
   let(:user) { create(:user) }
-  let(:valid_attributes) { { ingredients: "chicken, rice, broccoli" } }
-  let(:invalid_attributes) { { ingredients: "" } }
+  let!(:recipe) { create(:recipe, user: user) }
 
   before do
     sign_in user
   end
 
-  describe 'POST #create' do
-    context 'with valid params' do
-      it 'creates a new Recipe' do
-        expect {
-          post :create, params: { recipe: valid_attributes }
-        }.to change(Recipe, :count).by(1)
+  describe 'GET #show' do
+    context 'when the recipe exists' do
+      it 'assigns the requested recipe to @recipe' do
+        get :show, params: { id: recipe.id }
+        expect(assigns(:recipe)).to eq(recipe)
       end
 
-      it 'redirects to the created recipe' do
-        post :create, params: { recipe: valid_attributes }
-        expect(response).to redirect_to(recipe_path(assigns(:recipe)))
+      it 'renders the show template' do
+        get :show, params: { id: recipe.id }
+        expect(response).to render_template(:show)
       end
     end
 
-    context 'with invalid params' do
-      it 'renders the new template' do
-        post :create, params: { recipe: invalid_attributes }
-        expect(response).to render_template(:new)
+    context 'when the recipe does not exist' do
+      it 'raises an ActiveRecord::RecordNotFound error' do
+        expect {
+          get :show, params: { id: 'nonexistent_id' }
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    context 'when the recipe is successfully destroyed' do
+      it 'redirects to the recipes index with a success notice' do
+        expect {
+          delete :destroy, params: { id: recipe.id }
+        }.to change(Recipe, :count).by(-1)
+        expect(response).to redirect_to(recipes_path)
+        expect(flash[:notice]).to eq(I18n.t('views.recipes.destroy_success'))
       end
     end
   end

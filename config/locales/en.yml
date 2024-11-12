@@ -141,6 +141,8 @@ en:
       title: Recipes
       update_recipe: Update Recipe
       update_success: Recipe successfully updated.
+      destroy_success: Recipe successfully removed.
+      destroy_failure: Failed to remove the recipe.
     users:
       cancel: Cancel
       close_panel: Close panel
