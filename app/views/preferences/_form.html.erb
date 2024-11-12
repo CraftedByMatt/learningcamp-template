@@ -19,7 +19,7 @@
       <%= f.field :description, label: t('views.preferences.description'), autocomplete: 'description', required: true, as: :text %>
     </div>
     <div class="m-4">
-      <%= f.checkbox id: 'restriction', name: 'preference[restriction]', label: t('views.preferences.restriction'), checked: false %>
+      <%= f.checkbox id: 'restriction', name: 'preference[restriction]', label: t('views.preferences.restriction'), checked: preference.restriction %>
     </div>
     <div class="flex flex-shrink-0 justify-end px-4 py-4 gap-4 items-center">
       <div>
