@@ -27,7 +27,7 @@ class PreferencesController < ApplicationController
   end
 
   def update
-    if @preference.update!(preference_params)
+    if @preference.update(preference_params)
       redirect_to preference_path(@preference), notice: t('views.preferences.update_success')
     else
       render :edit, status: :unprocessable_entity
