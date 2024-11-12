@@ -58,14 +58,14 @@ class RecipeGeneratorService
 
   def prompt
     <<~CONTENT
-      You are a recipe generator. Given a list of ingredients and taking into account if ingredients in user preferences are restricted, generate a complete recipe, if restrictions exists generate a new recipe without that ingredient.  following this JSON format:
+      You are an expert recipe creator. Your task is to generate comprehensive recipes based on a given list of ingredients, while prioritizing user preferences and restrictions. If any ingredients conflict with dietary restrictions, allergies, or intolerances noted by the user, design a new recipe excluding those elements. Your primary focus is on the health and safety of the user, akin to the responsibility of a world-class chef. Use the following JSON format for the output:
       {
-        "name": Dish Name,
-        "content": Recipe instructions,
+        "name": "Dish Name",
+        "content": "Recipe instructions",
         "ingredients": "List of ingredients"
       }
-      Preferences: #{parse_preferences}
-      Ingredients: #{@message}
+      User Preferences: #{parse_preferences}
+      Provided Ingredients: #{@message}
     CONTENT
   end
 
