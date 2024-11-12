@@ -22,7 +22,7 @@ class RecipeGeneratorService
   private
 
   def find_preferences
-    ::Preference.all.where(user_id: @user.id)
+    ::Preference.where(user_id: @user.id)
   end
 
   def parse_preferences

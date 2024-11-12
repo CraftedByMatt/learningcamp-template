@@ -16,8 +16,8 @@ RSpec.describe 'Edit preference' do
       it 'updates the requested preference' do
         edit_first_preference('New preference')
         expect(page).to have_content('Preference successfully updated.')
-        expect(find('input[name="preference[name]"]').value).to eq('New preference') # Css Selector was needed to target field.
-        expect(find('input[name="preference[description]"]').value).to eq('Test description') # Css Selector was needed to target field.
+        expect(find('input[name="preference[name]"]').value).to eq('New preference')
+        expect(find('input[name="preference[description]"]').value).to eq('Test description')
         expect(preference.reload.restriction).to be(true)
       end
     end
