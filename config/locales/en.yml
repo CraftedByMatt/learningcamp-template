@@ -102,6 +102,7 @@ en:
       - Description
       - Restriction
       create_preference: Create Preference
+      create_success: Preference successfully created.
       description: Description
       edit:
         description: ''
@@ -118,6 +119,9 @@ en:
       show_preference: Show Preference
       title: Preferences
       update_preference: Update Preference
+      update_success: Preference successfully updated.
+      destroy_success: Preference successfully removed.
+      destroy_failure: Failed to remove the preference.
     recipes:
       cancel: Cancel
       close_panel: Close
@@ -125,6 +129,7 @@ en:
       - Name
       - Ingredients
       create_recipe: Create Recipe
+      create_success: Recipe successfully created.
       description: Here you will find all your recipes
       ingredients: Ingredients
       name: Name
@@ -134,6 +139,10 @@ en:
       new_recipe: New Recipe
       show_recipe: Recipe
       title: Recipes
+      update_recipe: Update Recipe
+      update_success: Recipe successfully updated.
+      destroy_success: Recipe successfully removed.
+      destroy_failure: Failed to remove the recipe.
     users:
       cancel: Cancel
       close_panel: Close panel

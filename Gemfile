@@ -93,6 +93,7 @@ group :test do
   gem 'simplecov', '~> 0.22.0', require: false
   gem 'test-prof', '~> 1.3'
   gem 'webmock', '~> 3.23'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
